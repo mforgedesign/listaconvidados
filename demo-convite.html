@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Exemplo RSVP conectado</title><style>html,body{margin:0;min-height:100%;background:#201b18;font-family:system-ui,sans-serif}.demo{width:min(620px,100%);margin:auto;padding:20px}.demo-note{margin:0 0 14px;color:#f7eee8;text-align:center;font-size:13px}</style></head><body><main class="demo"><p class="demo-note">Exemplo funcional do snippet HTML autocontido conectado ao Supabase</p><div class="mforge-rsvp-database" style="width:100%;max-width:560px;margin:0 auto;"><iframe title="Confirmação de presença" sandbox="allow-scripts allow-forms" loading="eager" style="display:block;width:100%;height:min(720px,78vh);min-height:580px;border:0;border-radius:24px;background:#f5eee7;" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;pt-BR&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;
+&lt;style&gt;
+:root{--accent:#7b4f35;--ink:#2d231f;--muted:#756861;--paper:#fffdfa;--line:rgba(70,49,38,.15);font-family:Inter,ui-sans-serif,system-ui,-apple-system,&quot;Segoe UI&quot;,sans-serif;color:var(--ink);background:transparent}
+*{box-sizing:border-box}body{margin:0;padding:14px;background:linear-gradient(145deg,#f8f3ed,#eee4da);min-height:100vh}.card{position:relative;overflow:hidden;max-width:520px;margin:auto;padding:24px 20px 20px;border:1px solid rgba(255,255,255,.8);border-radius:28px;background:rgba(255,253,250,.96);box-shadow:0 22px 60px rgba(48,31,20,.16)}
+.card:before{content:&quot;&quot;;position:absolute;inset:0 0 auto;height:6px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}.eyebrow{margin:0 0 6px;color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}.title{margin:0;font-family:Georgia,serif;font-size:clamp(26px,7vw,38px);font-weight:500;line-height:1.05}.intro{margin:10px 0 20px;color:var(--muted);font-size:14px;line-height:1.55}.loading{padding:20px 0;color:var(--muted);text-align:center}.hidden{display:none!important}.field{margin:0 0 15px}.label{display:block;margin:0 0 7px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.input{width:100%;height:46px;padding:0 13px;border:1px solid var(--line);border-radius:13px;background:#fff;color:var(--ink);font:inherit;outline:none;transition:.2s}.input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent)}.hint{display:block;margin-top:6px;color:var(--muted);font-size:12px;line-height:1.4}.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.choice{min-height:44px;padding:9px;border:1px solid var(--line);border-radius:13px;background:#fff;color:var(--ink);font-weight:750;cursor:pointer}.choice.active{border-color:var(--accent);background:var(--accent);color:#fff}.suggestions{display:grid;gap:5px;margin-top:7px;padding:6px;border:1px solid var(--line);border-radius:14px;background:#fff;box-shadow:0 12px 30px rgba(45,35,31,.12)}.suggestion{display:flex;justify-content:space-between;gap:10px;width:100%;padding:10px;border:0;border-radius:10px;background:transparent;color:var(--ink);text-align:left;cursor:pointer}.suggestion:hover,.suggestion:focus{background:color-mix(in srgb,var(--accent) 10%,white);outline:none}.suggestion small{color:var(--muted)}.selected{margin-top:7px;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--accent) 10%,white);color:var(--accent);font-size:12px;font-weight:750}.submit{display:flex;align-items:center;justify-content:center;width:100%;min-height:50px;margin-top:7px;border:0;border-radius:15px;background:var(--accent);color:#fff;font:800 14px/1 inherit;letter-spacing:.04em;cursor:pointer;box-shadow:0 12px 25px color-mix(in srgb,var(--accent) 28%,transparent)}.submit:disabled{cursor:wait;opacity:.65}.message{margin:12px 0 0;padding:11px 12px;border-radius:12px;font-size:13px;line-height:1.45}.message.error{background:#fff0f0;color:#9b2c2c}.message.success{background:#edf9f0;color:#22683a}.success-screen{text-align:center;padding:26px 4px}.success-icon{display:grid;place-items:center;width:66px;height:66px;margin:0 auto 16px;border-radius:50%;background:color-mix(in srgb,var(--accent) 12%,white);color:var(--accent);font-size:32px}.footer{margin:18px 0 0;color:#9a8c84;font-size:10px;text-align:center;letter-spacing:.08em;text-transform:uppercase}@media(max-width:420px){body{padding:8px}.card{padding:21px 15px 17px;border-radius:22px}.choice-grid{grid-template-columns:1fr}.title{font-size:28px}}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;main class=&quot;card&quot;&gt;
+  &lt;p class=&quot;eyebrow&quot;&gt;Confirmação de presença&lt;/p&gt;
+  &lt;h1 class=&quot;title&quot; id=&quot;event-title&quot;&gt;Casamento Ana &amp;amp; Rafael — Demonstração&lt;/h1&gt;
+  &lt;p class=&quot;intro&quot;&gt;Sua resposta nos ajuda a preparar cada detalhe com carinho.&lt;/p&gt;
+  &lt;div class=&quot;loading&quot; id=&quot;loading&quot;&gt;Carregando confirmação…&lt;/div&gt;
+  &lt;form id=&quot;form&quot; class=&quot;hidden&quot; novalidate&gt;
+    &lt;div class=&quot;field&quot;&gt;
+      &lt;span class=&quot;label&quot;&gt;Você poderá comparecer?&lt;/span&gt;
+      &lt;div class=&quot;choice-grid&quot;&gt;
+        &lt;button class=&quot;choice active&quot; id=&quot;attending-yes&quot; type=&quot;button&quot;&gt;Sim, estarei presente&lt;/button&gt;
+        &lt;button class=&quot;choice&quot; id=&quot;attending-no&quot; type=&quot;button&quot;&gt;Não poderei comparecer&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;field&quot;&gt;
+      &lt;label class=&quot;label&quot; for=&quot;guest-name&quot;&gt;Seu nome completo&lt;/label&gt;
+      &lt;input class=&quot;input&quot; id=&quot;guest-name&quot; autocomplete=&quot;off&quot; maxlength=&quot;160&quot; placeholder=&quot;Comece a digitar seu nome&quot; required&gt;
+      &lt;span class=&quot;hint&quot; id=&quot;name-hint&quot;&gt;&lt;/span&gt;
+      &lt;div class=&quot;suggestions hidden&quot; id=&quot;suggestions&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;selected hidden&quot; id=&quot;selected-name&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;field hidden&quot; id=&quot;phone-field&quot;&gt;
+      &lt;label class=&quot;label&quot; for=&quot;guest-phone&quot;&gt;Seu WhatsApp&lt;/label&gt;
+      &lt;input class=&quot;input&quot; id=&quot;guest-phone&quot; inputmode=&quot;tel&quot; maxlength=&quot;30&quot; placeholder=&quot;(DDD) 99999-9999&quot;&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;field hidden&quot; id=&quot;companions-field&quot;&gt;
+      &lt;label class=&quot;label&quot; for=&quot;companions&quot;&gt;Acompanhantes&lt;/label&gt;
+      &lt;input class=&quot;input&quot; id=&quot;companions&quot; type=&quot;number&quot; min=&quot;0&quot; value=&quot;0&quot;&gt;
+      &lt;span class=&quot;hint&quot; id=&quot;companions-hint&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;button class=&quot;submit&quot; id=&quot;submit&quot; type=&quot;submit&quot;&gt;Enviar confirmação&lt;/button&gt;
+    &lt;div class=&quot;message hidden&quot; id=&quot;message&quot; role=&quot;status&quot;&gt;&lt;/div&gt;
+  &lt;/form&gt;
+  &lt;section class=&quot;success-screen hidden&quot; id=&quot;success&quot;&gt;
+    &lt;div class=&quot;success-icon&quot;&gt;✓&lt;/div&gt;
+    &lt;h2 id=&quot;success-title&quot;&gt;Resposta registrada&lt;/h2&gt;
+    &lt;p class=&quot;intro&quot; id=&quot;success-copy&quot;&gt;&lt;/p&gt;
+  &lt;/section&gt;
+  &lt;p class=&quot;footer&quot;&gt;RSVP protegido • MForge&lt;/p&gt;
+&lt;/main&gt;
+&lt;script&gt;
+(function(){
+  &#39;use strict&#39;;
+  var cfg={&quot;supabaseUrl&quot;:&quot;https://cqqglaelazsnsqommhqv.supabase.co&quot;,&quot;publishableKey&quot;:&quot;sb_publishable_2fLwRKAMPO7oGOk6aEI1VA_ODSek95q&quot;,&quot;publicToken&quot;:&quot;W43NWpxVxlbmhyfKeslxKMbW4R351yHVPVu3dPqvsIc&quot;,&quot;eventName&quot;:&quot;Casamento Ana &amp; Rafael — Demonstração&quot;};
+  var state={policy:null,selectedGuest:null,attending:true,timer:null};
+  var byId=function(id){return document.getElementById(id)};
+  async function rpc(name,body){
+    var response=await fetch(cfg.supabaseUrl+&#39;/rest/v1/rpc/&#39;+name,{method:&#39;POST&#39;,headers:{apikey:cfg.publishableKey,&#39;Content-Type&#39;:&#39;application/json&#39;},body:JSON.stringify(body)});
+    var data=await response.json().catch(function(){return {ok:false,error:&#39;Resposta inválida do servidor.&#39;}});
+    if(!response.ok)throw new Error(data.message||data.error||&#39;Falha de comunicação.&#39;);
+    return data;
+  }
+  function message(text,type){var el=byId(&#39;message&#39;);el.textContent=text||&#39;&#39;;el.className=&#39;message &#39;+(type||&#39;&#39;);if(!text)el.classList.add(&#39;hidden&#39;)}
+  function setAttending(value){state.attending=value;byId(&#39;attending-yes&#39;).classList.toggle(&#39;active&#39;,value);byId(&#39;attending-no&#39;).classList.toggle(&#39;active&#39;,!value);byId(&#39;companions-field&#39;).classList.toggle(&#39;hidden&#39;,!value||!state.policy.allowCompanions);if(!value)byId(&#39;companions&#39;).value=&#39;0&#39;}
+  function selectGuest(item){state.selectedGuest=item;byId(&#39;guest-name&#39;).value=item.name;byId(&#39;suggestions&#39;).classList.add(&#39;hidden&#39;);byId(&#39;selected-name&#39;).textContent=&#39;Selecionado: &#39;+item.name+(item.group?&#39; • &#39;+item.group:&#39;&#39;);byId(&#39;selected-name&#39;).classList.remove(&#39;hidden&#39;);var max=Number(item.maxCompanions||0);byId(&#39;companions&#39;).max=String(max);byId(&#39;companions-hint&#39;).textContent=max?&#39;Até &#39;+max+&#39; acompanhante(s).&#39;:&#39;Este convite é individual.&#39;;message(&#39;&#39;,&#39;&#39;)}
+  function renderSuggestions(items){var box=byId(&#39;suggestions&#39;);box.replaceChildren();if(!items.length){box.classList.add(&#39;hidden&#39;);return}items.forEach(function(item){var button=document.createElement(&#39;button&#39;);button.type=&#39;button&#39;;button.className=&#39;suggestion&#39;;var name=document.createElement(&#39;span&#39;);name.textContent=item.name;button.appendChild(name);if(item.group){var group=document.createElement(&#39;small&#39;);group.textContent=item.group;button.appendChild(group)}button.onclick=function(){selectGuest(item)};box.appendChild(button)});box.classList.remove(&#39;hidden&#39;)}
+  async function searchNames(query){try{var data=await rpc(&#39;rsvp_search_guests&#39;,{p_public_token:cfg.publicToken,p_query:query});if(!data.ok)throw new Error(data.error||&#39;Não foi possível consultar a lista.&#39;);renderSuggestions(data.items||[])}catch(error){message(error.message,&#39;error&#39;)}}
+  async function init(){
+    try{var policy=await rpc(&#39;rsvp_get_policy&#39;,{p_public_token:cfg.publicToken});if(!policy.ok)throw new Error(policy.error||&#39;Confirmação indisponível.&#39;);state.policy=policy;byId(&#39;event-title&#39;).textContent=policy.eventName||cfg.eventName;byId(&#39;loading&#39;).classList.add(&#39;hidden&#39;);byId(&#39;form&#39;).classList.remove(&#39;hidden&#39;);byId(&#39;phone-field&#39;).classList.toggle(&#39;hidden&#39;,!policy.collectWhatsapp);byId(&#39;companions-field&#39;).classList.toggle(&#39;hidden&#39;,!policy.allowCompanions);byId(&#39;companions&#39;).max=String(policy.maxCompanions||0);byId(&#39;companions-hint&#39;).textContent=&#39;Até &#39;+(policy.maxCompanions||0)+&#39; acompanhante(s).&#39;;byId(&#39;name-hint&#39;).textContent=policy.nameLimitEnabled?&#39;Digite pelo menos 2 letras e selecione seu nome na lista.&#39;:&#39;Digite seu nome como deseja que apareça na lista.&#39;;setAttending(true)}
+    catch(error){byId(&#39;loading&#39;).textContent=error.message;byId(&#39;loading&#39;).style.color=&#39;#9b2c2c&#39;}
+  }
+  byId(&#39;attending-yes&#39;).onclick=function(){setAttending(true)};byId(&#39;attending-no&#39;).onclick=function(){setAttending(false)};
+  byId(&#39;guest-name&#39;).addEventListener(&#39;input&#39;,function(){state.selectedGuest=null;byId(&#39;selected-name&#39;).classList.add(&#39;hidden&#39;);renderSuggestions([]);if(!state.policy||!state.policy.nameLimitEnabled)return;clearTimeout(state.timer);var query=this.value.trim();if(query.length&lt;2)return;state.timer=setTimeout(function(){searchNames(query)},250)});
+  byId(&#39;form&#39;).addEventListener(&#39;submit&#39;,async function(event){
+    event.preventDefault();message(&#39;&#39;,&#39;&#39;);var name=byId(&#39;guest-name&#39;).value.trim();var phone=byId(&#39;guest-phone&#39;).value.trim();if(state.policy.nameLimitEnabled&amp;&amp;!state.selectedGuest)return message(&#39;Selecione seu nome entre as opções da lista.&#39;,&#39;error&#39;);if(!state.policy.nameLimitEnabled&amp;&amp;name.length&lt;2)return message(&#39;Informe seu nome completo.&#39;,&#39;error&#39;);if(state.policy.collectWhatsapp&amp;&amp;!phone)return message(&#39;Informe seu WhatsApp.&#39;,&#39;error&#39;);var companions=state.attending&amp;&amp;state.policy.allowCompanions?Number(byId(&#39;companions&#39;).value||0):0;var submit=byId(&#39;submit&#39;);submit.disabled=true;submit.textContent=&#39;Enviando…&#39;;
+    try{var data=await rpc(&#39;rsvp_confirm&#39;,{p_public_token:cfg.publicToken,p_guest_id:state.selectedGuest?state.selectedGuest.guestId:null,p_name:name,p_whatsapp:phone,p_companions:companions,p_attending:state.attending});if(!data.ok)throw new Error(data.error||&#39;Não foi possível registrar.&#39;);byId(&#39;form&#39;).classList.add(&#39;hidden&#39;);byId(&#39;success-title&#39;).textContent=state.attending?&#39;Presença confirmada!&#39;:&#39;Resposta registrada&#39;;byId(&#39;success-copy&#39;).textContent=data.message||&#39;Obrigado por responder.&#39;;byId(&#39;success&#39;).classList.remove(&#39;hidden&#39;)}
+    catch(error){message(error.message,&#39;error&#39;);submit.disabled=false;submit.textContent=&#39;Enviar confirmação&#39;}
+  });
+  init();
+})();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;"></iframe></div></main></body></html>
